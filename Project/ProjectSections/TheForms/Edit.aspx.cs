@@ -16,6 +16,7 @@ namespace Project.ProjectSections.TheForms
         public List<Subject> Subjects { get; set; }
         public List<Professor> Professors { get; set; }
         public List<ScientificRank> ScientificRanks { get; set; }
+        public List<LectureHours> LecturePrices { get; set; }
         protected async void Page_Load(object sender, EventArgs e)
         {
             try
@@ -25,10 +26,12 @@ namespace Project.ProjectSections.TheForms
                     Subjects = await dbContext.Subjects.ToListAsync();
                     Professors = await dbContext.Professor.ToListAsync();
                     ScientificRanks = await dbContext.ScientificRanks.ToListAsync();
+                    LecturePrices = await dbContext.LectureHours.ToListAsync();
                     if (string.IsNullOrEmpty(Request.QueryString["id"]))
                         throw new Exception("this row not found");
                     int id = Convert.ToInt32(Request.QueryString["id"]);
                     Entity = await dbContext.TheForms.Include("Subject")
+                                                     .Include("LectureHours")
                                                      .Include("Professor")
                                                      .Include("ScientificRank").Where(a => a.Id == id).FirstOrDefaultAsync();
                     if (Entity == null)
@@ -55,6 +58,17 @@ namespace Project.ProjectSections.TheForms
                     entity.SubjectCode = Convert.ToInt32(Request.Form["SubjectCode"]);
                     entity.ProfessorId = Convert.ToInt32(Request.Form["ProfessorId"]);
                     entity.ScientificRankCode = Convert.ToInt32(Request.Form["ScientificRankCode"]);
+                    entity.LectureHoursId = Convert.ToInt32(Request.Form["LecturePriceId"]);
+                    var lecturePrice = await dbContext.LectureHours.Where(a => a.Id == entity.LectureHoursId).FirstOrDefaultAsync();
+                    var scientificRanks = await dbContext.ScientificRanks.Where(a => a.Code == entity.ScientificRankCode).FirstOrDefaultAsync();
+
+
+                    entity.Price = scientificRanks.Price;
+                    entity.NumberOfHours = lecturePrice.NumberOfHours;
+
+
+
+
                     await dbContext.SaveChangesAsync();
                     Response.Redirect("Index");
                 }

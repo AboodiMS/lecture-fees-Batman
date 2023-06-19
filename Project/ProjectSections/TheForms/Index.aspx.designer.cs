@@ -69,6 +69,33 @@ namespace Project.ProjectSections.TheForms
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl FToFormDate;
 
         /// <summary>
+        /// FLecturePriceId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList FLecturePriceId;
+
+        /// <summary>
+        /// FUseIsPaidFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox FUseIsPaidFilter;
+
+        /// <summary>
+        /// FIsPaid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox FIsPaid;
+
+        /// <summary>
         /// FilterButton control.
         /// </summary>
         /// <remarks>

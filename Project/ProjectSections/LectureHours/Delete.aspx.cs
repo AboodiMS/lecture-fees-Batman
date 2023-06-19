@@ -8,11 +8,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.Entity;
 
-namespace Project.ProjectSections.TheForms
+namespace Project.ProjectSections.LecturePrices
 {
     public partial class Delete : System.Web.UI.Page
     {
-        public TheForm Entity { get; set; }
+        public LectureHours Entity { get; set; }
         protected async void Page_Load(object sender, EventArgs e)
         {
             try
@@ -22,12 +22,7 @@ namespace Project.ProjectSections.TheForms
                 int id = Convert.ToInt32(Request.QueryString["id"]);
                 using (var dbContext = new ProjectDbContext())
                 {
-                    Entity = await dbContext.TheForms
-                                            .Include("Professor")
-                                            .Include("Subject")
-                                            .Include("ScientificRank")
-                                            .Include("LectureHours")
-                                            .Where(a => a.Id == id).FirstOrDefaultAsync();
+                    Entity = await dbContext.LectureHours.Where(a => a.Id == id).FirstOrDefaultAsync();
 
                 }
                 if (Entity == null)
@@ -47,8 +42,8 @@ namespace Project.ProjectSections.TheForms
             {
                 var dbContext = new ProjectDbContext();
                 int id = Convert.ToInt32(Request.QueryString["id"]);
-                var entity = await dbContext.TheForms.FindAsync(id);
-                _ = dbContext.TheForms.Remove(entity);
+                var entity = await dbContext.LectureHours.FindAsync(id);
+                _ = dbContext.LectureHours.Remove(entity);
                 await dbContext.SaveChangesAsync();
                 Response.Redirect("Index");
             }

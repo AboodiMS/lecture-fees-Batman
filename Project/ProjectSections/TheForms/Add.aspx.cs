@@ -15,6 +15,8 @@ namespace Project.ProjectSections.TheForms
         public List<Professor> Professors { get; set; }
         public List<Subject> Subjects { get; set; }
         public List<ScientificRank> ScientificRanks { get; set; }
+        public List<LectureHours> LecturePrices { get; set; }
+
         protected async void Page_Load(object sender, EventArgs e)
         {
             try
@@ -24,6 +26,7 @@ namespace Project.ProjectSections.TheForms
                     Professors = await dbContext.Professor.ToListAsync();
                     Subjects = await dbContext.Subjects.ToListAsync();
                     ScientificRanks = await dbContext.ScientificRanks.ToListAsync();
+                    LecturePrices = await dbContext.LectureHours.ToListAsync();
                 }
             }
             catch (Exception ex)
@@ -45,6 +48,15 @@ namespace Project.ProjectSections.TheForms
                     entity.ProfessorId = Convert.ToInt32(Request.Form["ProfessorId"]);
                     entity.ScientificRankCode = Convert.ToInt32(Request.Form["ScientificRankCode"]);
                     entity.FormDate = DateTimeOffset.Parse( Request.Form["FormDate"]);
+                    entity.LectureHoursId = Convert.ToInt32(Request.Form["LecturePriceId"]);
+                    var lecturePrice = await dbContext.LectureHours.Where(a=>a.Id == entity.LectureHoursId).FirstOrDefaultAsync();
+                    var scientificRanks = await dbContext.ScientificRanks.Where(a => a.Code == entity.ScientificRankCode).FirstOrDefaultAsync();
+
+            
+                    entity.Price = scientificRanks.Price;
+                    entity.NumberOfHours = lecturePrice.NumberOfHours;
+                    entity.IsPaied = false;
+
                     dbContext.TheForms.Add(entity);
                     await dbContext.SaveChangesAsync();
                     Response.Redirect("Index");

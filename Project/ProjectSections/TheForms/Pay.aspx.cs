@@ -10,7 +10,7 @@ using System.Data.Entity;
 
 namespace Project.ProjectSections.TheForms
 {
-    public partial class Delete : System.Web.UI.Page
+    public partial class Pay : System.Web.UI.Page
     {
         public TheForm Entity { get; set; }
         protected async void Page_Load(object sender, EventArgs e)
@@ -28,7 +28,6 @@ namespace Project.ProjectSections.TheForms
                                             .Include("ScientificRank")
                                             .Include("LectureHours")
                                             .Where(a => a.Id == id).FirstOrDefaultAsync();
-
                 }
                 if (Entity == null)
                     throw new Exception("this row not found");
@@ -48,7 +47,8 @@ namespace Project.ProjectSections.TheForms
                 var dbContext = new ProjectDbContext();
                 int id = Convert.ToInt32(Request.QueryString["id"]);
                 var entity = await dbContext.TheForms.FindAsync(id);
-                _ = dbContext.TheForms.Remove(entity);
+                var IsPaid =!string.IsNullOrEmpty( Request.Form["IsPaid"]);
+                entity.IsPaied = IsPaid;
                 await dbContext.SaveChangesAsync();
                 Response.Redirect("Index");
             }

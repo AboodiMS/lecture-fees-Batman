@@ -34,6 +34,15 @@
                         <% } %>
                     </select>
                 </div>
+                <div class="mb-3">
+                    <label for="LecturePriceId" class="form-label">Lecture Hours</label>
+                    <select class="form-select" id="LecturePriceId" Name="LecturePriceId" required>
+                        <option value="<%= Entity?.LectureHoursId %>"><%= Entity?.LectureHours.Title %></option>
+                        <% foreach (var Entity in LecturePrices) { %>
+                            <option value="<%= Entity.Id %>"><%= Entity.Title %></option>
+                        <% } %>
+                    </select>
+                </div>
                 <div id="errorContainer" runat="server" class="alert alert-danger" style="display: none;"></div>
                 <asp:Button ID="SubmitButton" runat="server" Text="Edit" CssClass="btn btn-secondary" EnableEventValidation="false"  OnClick="SubmitButton_Click" />
                 <a href='<%= ResolveUrl("Index") %>' class="btn btn-link">Back To List</a>

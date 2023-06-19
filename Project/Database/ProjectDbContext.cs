@@ -15,6 +15,7 @@ namespace Project.Database
         public DbSet<ScientificRank> ScientificRanks { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<TheForm> TheForms { get; set; }
+        public DbSet<LectureHours> LectureHours { get; set; }
 
         public ProjectDbContext() : base("name=ProjectDbContext")
         {
@@ -55,6 +56,12 @@ namespace Project.Database
             .HasRequired(o => o.ScientificRank)
             .WithMany(c => c.TheForms)
             .HasForeignKey(o => o.ScientificRankCode)
+            .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<TheForm>()
+            .HasRequired(o => o.LectureHours)
+            .WithMany(c => c.TheForms)
+            .HasForeignKey(o => o.LectureHoursId)
             .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);

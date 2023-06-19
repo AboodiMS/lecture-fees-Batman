@@ -4,7 +4,7 @@
 
     <main>
         <section class="row" aria-labelledby="aspnetTitle">
-            <h1 id="aspnetTitle">Wellcom to The Forms Application ...</h1>
+            <h1 id="aspnetTitle">Wellcom to Lectures Fess Application ...</h1>
         </section>
 
     </main>

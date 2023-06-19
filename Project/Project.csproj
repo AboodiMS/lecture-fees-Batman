@@ -132,6 +132,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="ProjectSections\LectureHours\Add.aspx" />
+    <Content Include="ProjectSections\LectureHours\Delete.aspx" />
+    <Content Include="ProjectSections\LectureHours\Edit.aspx" />
+    <Content Include="ProjectSections\LectureHours\Index.aspx" />
     <Content Include="ProjectSections\Professors\Add.aspx" />
     <Content Include="ProjectSections\Professors\Delete.aspx" />
     <Content Include="ProjectSections\Professors\Edit.aspx" />
@@ -148,6 +152,7 @@
     <Content Include="ProjectSections\TheForms\Delete.aspx" />
     <Content Include="ProjectSections\TheForms\Edit.aspx" />
     <Content Include="ProjectSections\TheForms\Index.aspx" />
+    <Content Include="ProjectSections\TheForms\Pay.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -212,6 +217,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Database\Entities\LectureHours.cs" />
     <Compile Include="Database\Entities\Professor.cs" />
     <Compile Include="Database\Entities\ScientificRank.cs" />
     <Compile Include="Database\Entities\Subject.cs" />
@@ -234,11 +240,39 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202305260936349_CreateDb.cs" />
-    <Compile Include="Migrations\202305260936349_CreateDb.designer.cs">
-      <DependentUpon>202305260936349_CreateDb.cs</DependentUpon>
+    <Compile Include="Migrations\202306131049238_createdb.cs" />
+    <Compile Include="Migrations\202306131049238_createdb.designer.cs">
+      <DependentUpon>202306131049238_createdb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ProjectSections\LectureHours\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectSections\LectureHours\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectSections\LectureHours\Delete.aspx.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectSections\LectureHours\Delete.aspx.designer.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectSections\LectureHours\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectSections\LectureHours\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectSections\LectureHours\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectSections\LectureHours\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProjectSections\Professors\Add.aspx.cs">
       <DependentUpon>Add.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -351,6 +385,13 @@
     <Compile Include="ProjectSections\TheForms\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProjectSections\TheForms\Pay.aspx.cs">
+      <DependentUpon>Pay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectSections\TheForms\Pay.aspx.designer.cs">
+      <DependentUpon>Pay.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
@@ -379,8 +420,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202305260936349_CreateDb.resx">
-      <DependentUpon>202305260936349_CreateDb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202306131049238_createdb.resx">
+      <DependentUpon>202306131049238_createdb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

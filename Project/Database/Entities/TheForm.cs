@@ -15,5 +15,10 @@ namespace Project.Database.Entities
         public int SubjectCode { get; set; }
         public Subject Subject { get; set; }
         public DateTimeOffset FormDate { get; set; }
+        public int LectureHoursId { get; set; }
+        public LectureHours LectureHours { get; set; }
+        public decimal Price { get; set; }
+        public decimal NumberOfHours { get; set;}
+        public bool IsPaied { get; set; }
     }
 }

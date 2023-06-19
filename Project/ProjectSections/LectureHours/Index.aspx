@@ -1,6 +1,6 @@
-﻿<%@ Page Title="ScientificRanks List" Language="C#" Async="true"  MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Project.ProjectSections.ScientificRanks.Index" %>
+﻿<%@ Page Title="Lecture Hours" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="Project.ProjectSections.LecturePrices.index" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>ScientificRanks List</h1>
+        <h1>Lecture Hours List</h1>
     <div id="errorContainer" runat="server" class="alert alert-danger" style="display: none;"></div>
     <a class="btn btn-primary" href="Add">Add</a>
      <form id="filterForm">
@@ -8,13 +8,7 @@
           <div class="col-md-4">
             <div class="mb-3">
               <label for="FTitle" class="form-label">Title</label>
-              <input type="text" runat="server" class="form-control" id="FTitle" placeholder="Enter Title">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="mb-3">
-              <label for="FDescription" class="form-label">Description</label>
-              <input type="text" runat="server" class="form-control" id="FDescription" placeholder="Enter Description">
+              <input type="text" runat="server" class="form-control" id="FTitle" placeholder="Enter title">
             </div>
           </div>
         </div>
@@ -26,8 +20,7 @@
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Description</th>
-                <th>Price</th>
+                <th>Number Of Hours</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>

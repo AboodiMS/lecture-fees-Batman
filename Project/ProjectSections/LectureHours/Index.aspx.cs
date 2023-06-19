@@ -1,40 +1,34 @@
 ﻿using Project.Database;
-using Project.Database.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
 
-namespace Project.ProjectSections.ScientificRanks
+namespace Project.ProjectSections.LecturePrices
 {
-    public partial class Index : System.Web.UI.Page
+    public partial class index : System.Web.UI.Page
     {
         protected string PopulateTable()
         {
             using (var dbContext = new ProjectDbContext())
             {
-                var entities = dbContext.ScientificRanks
-                         .Where(a => string.IsNullOrEmpty(FTitle.Value) || a.Title.ToLower().Contains(FTitle.Value.ToLower()))
-                         .Where(a => string.IsNullOrEmpty(FDescription.Value) || a.Description.ToLower().Contains(FDescription.Value.ToLower()))
-                         .ToList();
+                var entities = dbContext.LectureHours
+                    .Where(a => string.IsNullOrEmpty(FTitle.Value) || a.Title.ToLower().Contains(FTitle.Value.ToLower()))
+                    .ToList();
                 string tableRows = string.Empty;
                 foreach (var item in entities)
                 {
                     string title = item.Title;
-                    string description = item.Description;
-                    string price = item.Price.ToString();
-
-                    string editUrl = ResolveUrl("Edit?code=" + item.Code);
-                    string deleteUrl = ResolveUrl("Delete?code=" + item.Code);
+                    string numberOfHours = item.NumberOfHours.ToString();
+                    string editUrl = ResolveUrl("Edit?id=" + item.Id);
+                    string deleteUrl = ResolveUrl("Delete?id=" + item.Id);
 
                     tableRows += $"<tr>" +
                                  $"<td>{title}</td>" +
-                                 $"<td>{description}</td>" +
-                                 $"<td>{price}</td>" +
+                                 $"<td>{numberOfHours}</td>" +
                                  $"<td><a href='{editUrl}'  class=\"btn btn-secondary\">Edit</a></td>" +
                                  $"<td><a href='{deleteUrl}'  class=\"btn btn-danger\">Delete</a></td>" +
                                  $"</tr>";
@@ -43,7 +37,26 @@ namespace Project.ProjectSections.ScientificRanks
                 return tableRows;
             }
         }
+
         protected void Page_Load(object sender, EventArgs e)
+        {
+
+            try
+            {
+                if (!IsPostBack)
+                {
+                    PopulateTable();
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = "An error occurred: " + ex.Message;
+                errorContainer.InnerText = errorMessage;
+                errorContainer.Style.Remove("display");
+            }
+        }
+
+        protected void FilterButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -55,6 +68,7 @@ namespace Project.ProjectSections.ScientificRanks
                 errorContainer.InnerText = errorMessage;
                 errorContainer.Style.Remove("display");
             }
+
         }
     }
 }
